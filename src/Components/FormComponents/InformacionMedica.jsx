@@ -1,17 +1,48 @@
 import { Box, Checkbox, FormControlLabel, InputAdornment, styled, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ModuleFinder from '../../apis/ModuleFinder'
 
 const StyledBox = styled(Box)({
     display:'flex',
     flexDirection: 'row',
     padding: 5
-    
-  
   })
 
-function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
+  const disableBlack = {padding:1, "& .MuiInputBase-input.Mui-disabled": {
+    WebkitTextFillColor: "#000000",
+}}
 
 
+function InformacionMedica({handleChange, handleCheck, p, isDisabled, m}) {
+  
+  const [modules, setModules] = useState([])
+  
+  
+
+
+  useEffect(() =>{
+
+    const fetchData = async() =>{
+      try {
+        const mResponse = await ModuleFinder.get('/active')
+        setModules(mResponse.data.data.modules)
+        //console.log(mResponse) 
+      } catch (err) {
+        
+      }
+    }
+    
+    fetchData()
+
+  }, [])
+
+  const listOfItems = []
+  modules.map(m =>(
+    listOfItems.push(<FormControlLabel key = {m.id} name = {m.nombre_modulo} onChange={handleCheck} sx={{flexGrow: 1}} control={<Checkbox />} value = {m.id} label= {m.nombre_corto} disabled = {isDisabled} />)
+    
+  ))
+
+    console.log(listOfItems)
   return (
     <>
         {/* Title */}
@@ -29,7 +60,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 type={'number'}
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">kg</InputAdornment>,
                 }}
@@ -42,7 +73,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 type={'number'}
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position='end'>cm</InputAdornment>,
                 }}
@@ -54,7 +85,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 label="T/A"
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">units</InputAdornment>,
                 }}
@@ -67,7 +98,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 type={'number'}
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">units</InputAdornment>,
                 }}
@@ -80,7 +111,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 type={'number'}
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">units</InputAdornment>,
                 }}
@@ -94,7 +125,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
                 type={'number'}
                 variant="outlined"
                 onChange={handleChange}
-                sx={{padding:1}}
+                sx={disableBlack}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">C</InputAdornment>,
                 }}
@@ -109,7 +140,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
               label="Alergias"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow: 1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -119,7 +150,7 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
             label="APP"
             variant="outlined"
             onChange={handleChange}
-            sx={{flexGrow: 1, padding:1}}
+            sx={{...disableBlack, flexGrow:1}}
             size ={'small'}
             disabled = {isDisabled}
           />
@@ -131,17 +162,14 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
             label="Motivo de Consulta"
             variant="outlined"
             onChange={handleChange}
-            sx={{flexGrow: 1, padding:1}}
+            sx={{...disableBlack, flexGrow:1}}
             size ={'small'}
             disabled = {isDisabled}
           />
         </StyledBox>
         {/* Checkboxes */}
         <StyledBox>
-        <FormControlLabel name = "estado_dental" onChange={handleCheck} sx={{flexGrow: 1}} control={<Checkbox />} value = {1} label="Dental" disabled = {isDisabled} />
-        <FormControlLabel name = "estado_psicologia" onChange={handleCheck} sx={{flexGrow: 1}} control={<Checkbox />} value = {2} label="Psicologia" disabled = {isDisabled} />
-        <FormControlLabel name = "estado_fisioterapia" onChange={handleCheck}sx={{flexGrow: 1}} control={<Checkbox />} value = {3} label="Fisioterapia" disabled = {isDisabled} />
-        <FormControlLabel name = "estado_estiloDeVida" onChange={handleCheck}sx={{flexGrow: 1}} control={<Checkbox />} value = {4} label="Estilo de Vida/Nutricion" disabled = {isDisabled} />
+        {listOfItems}
         </StyledBox>
         <StyledBox>
         <TextField
@@ -151,7 +179,8 @@ function InformacionMedica({handleChange, handleCheck, p, isDisabled}) {
           label="Padecimiento actual"
           multiline
           rows={4}
-          sx={{flexGrow: 1}}
+          
+          sx={{...disableBlack, flexGrow:1}}
           disabled = {isDisabled}
         />
         </StyledBox>

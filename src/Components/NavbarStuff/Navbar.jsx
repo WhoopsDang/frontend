@@ -1,7 +1,8 @@
 import { Flaky, Mail, Notifications } from '@mui/icons-material';
-import { AppBar, Avatar, Badge, Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Badge, Box, Button, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import BasicDrawer from './BasicDrawer';
 
 
@@ -42,6 +43,9 @@ const Navbar = () => {
             <StyledToolbar>
                 
                 <BasicDrawer/>
+                <Link to = "/recepcion" style={{textDecoration: 'none'}}>
+                    <Button variant = "outline" sx={{color: 'white'}}>Recepcion</Button>
+                </Link>
 
                 <Flaky sx={{display: {xs:"block", sm:"none"}}}/>
                 <Icons>

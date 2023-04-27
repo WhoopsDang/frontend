@@ -10,6 +10,10 @@ const StyledBox = styled(Box)({
   
   })
 
+  const disableBlack = {padding:1, "& .MuiInputBase-input.Mui-disabled": {
+    WebkitTextFillColor: "#000000",
+}}
+
   
 
 
@@ -31,7 +35,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Nombre"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow:1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -41,7 +45,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Apellidos"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow:1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -52,7 +56,9 @@ function PersonalData({handleChange, p, isDisabled}) {
               type={'number'}
               variant="outlined"
               onChange={handleChange}
-              sx={{padding:1}}
+              sx={{padding:1, "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000000",
+            }}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -62,7 +68,9 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Sexo"
               variant="outlined"
               onChange={handleChange}
-              sx={{padding:1}}
+              sx={{padding:1, "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000000",
+            }}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -75,7 +83,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Estado Civil"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow: 1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -85,7 +93,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Religion"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow: 1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -95,7 +103,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Ocupacion"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow: 1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -108,7 +116,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Direccion"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow: 1, padding:1}}
+              sx={{...disableBlack, flexGrow:1}}
               size ={'small'}
               disabled = {isDisabled}
             />
@@ -118,7 +126,7 @@ function PersonalData({handleChange, p, isDisabled}) {
               label="Ciudad"
               variant="outlined"
               onChange={handleChange}
-              sx={{flexGrow:.5, padding:1}}
+              sx={{...disableBlack, flexGrow:.5}}
               size ={'small'}
               disabled = {isDisabled}
             />
